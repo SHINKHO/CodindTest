@@ -27,21 +27,21 @@
   - DB에 USER 생성 Librarian. 
   - 책 분류를 위해 한국십진분류법(KDC)을 도입
     - https://if-blog.tistory.com/10987 교육부 블로그 참조
-    - 한국십진분류법 제 6판 설명회(2013,문지현 외) 참조 
-    - 도서 관련 TABLE
-      - classification 테이블 : KDC 기준 주 분류와 차 분류의 슈퍼키를 가진 테이블
-      - author : index값과 저자의 이름을 가진 테이블
-      - book : classification 과 author를 fk로 가지는 책 테이블
+    - 한국십진분류법 제 6판 설명회(2013,문지현 외) 참조
+    - ##### 도서 관련 TABLE
+      - <b>classification</b> 테이블 : KDC 기준 주 분류와 차 분류의 슈퍼키를 가진 테이블
+      - <b>author</b> : index값과 저자의 이름을 가진 테이블
+      - <b>book</b> : classification 과 author를 fk로 가지는 책 테이블
         - 중복 가능한 제목을 가짐.
         - 정기 간행,시리즈물일경우 version 으로 몇 번째인지 명시
         - 단순 갯수를 나타내는 Unique key count로 전체 갯수 명시
         - 해당 도서의 isbn를 pk로 사용.
-    - 사용자 관련 TABLE
+    - ##### 사용자 관련 TABLE
       - 기간상 문제로 jwt 등의 보안 요소를 적용하기 버거워 사용자 비밀번호는 적용하지 않음.
       - <b>오프라인에서 회원 관리를 한다고 가정함</b>
-    - 로깅 관련 TABLE
-      - transaction_RENT : book 과 회원의 index를 fk로 갖는 테이블
+    - ##### 로깅 관련 TABLE
+      - <b>transaction_RENT</b> : book 과 회원의 index를 fk로 갖는 테이블
         - 빌려간 날짜 : TIMESTAMP WITH ZONE , 기본값은 SYSTIMESTAMP
-      - transaction_RETURN : book 과 회원의 index를 fk로 갖는 테이블
+      - <b>transaction_RETURN</b> : book 과 회원의 index를 fk로 갖는 테이블
         - 돌려준 날짜 : TIMESTAMP WITH ZONE , 기본값은 SYSTIMESTAMP
     
