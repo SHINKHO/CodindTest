@@ -8,9 +8,9 @@
 
 ### 진행사항
 
-- 2023.09.12 : 프로젝트 시작 , aws mfcec2 인스턴스 생성 , 사용기술 선정
-  요구사항중 매우 강조되는 amazon ec2 서버에 대해 학습, 
-  익숙한 Spring boot 의 RESTful api 를 백엔드로, mariaDB를 DB로 사용하고, JPA로 DB관리
+- 2023.09.12 : 프로젝트 시작 , aws mfcec2 인스턴스 생성 , 사용기술 선정 <br />
+  요구사항중 매우 강조되는 amazon ec2 서버에 대해 학습 <br />
+  익숙한 <b>Spring boot</b> 의 <b>RESTful api</b> 를 백엔드로, <b>mariaDB</b>를 DB로 사용하고, <b>JPA</b>로 DB관리
   
-- 2023.09.13 : db단 유저와 테이블 세팅,
+- 2023.09.13 : db단 유저와 테이블 세팅 <br/>
   계정이름 Librarian.
