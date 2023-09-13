@@ -39,6 +39,7 @@
     - ##### 사용자 관련 TABLE
       - 기간상 문제로 jwt 등의 보안 요소를 적용하기 버거워 사용자 비밀번호는 적용하지 않음.
       - <b>오프라인에서 회원 관리를 한다고 가정함</b>
+      - <b>Member 테이블</b> : member_id를 pk로 이외에는 사용자명을 갖는 테이블
     - ##### 로깅 관련 TABLE
       - <b>transaction_RENT</b> : book 과 회원의 index를 fk로 갖는 테이블
         - 빌려간 날짜 : TIMESTAMP WITH ZONE , 기본값은 SYSTIMESTAMP
