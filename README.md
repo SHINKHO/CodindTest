@@ -13,4 +13,6 @@
   익숙한 <b>Spring boot</b> 의 <b>RESTful api</b> 를 백엔드로, <b>mariaDB</b>를 DB로 사용하고, <b>JPA</b>로 DB관리
   
 - 2023.09.13 : db단 유저와 테이블 세팅 <br/>
-  계정이름 Librarian.
+  계정이름 Librarian. <br>
+  책 분류를 위해 한국십진분류법(KDC)을 도입 </br>
+  저자 테이블을 따로 구성하여 정규화 </br>
