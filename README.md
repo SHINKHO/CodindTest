@@ -68,4 +68,8 @@
             - 단순 전체 재고량이며 <b>*대출 및 반납시 변동하지 않음*</b>
           - BOOK_VER 은 해당 책이 연속된 시리즈일시 몇 번째 시리즈인지 나타냄.
           - WRITTEN_YEAR 은 책이 쓰인 연도를 저장하여 추후 검색에 활용될 수 있음.
-        - ##### 
+        - ##### TRANSACTION_RENT { <ins>TRANSACTION_RENT_NO : bigint</ins>, _MEMBER_ID_ : VARCHAR(15), _BOOK_ID_ : bigint, RENT_DATE : TIMESTAMP }
+          - pk인 TRANSACTION_RENT_NO 는 날짜와 기타 정보의 조합 혹은 MD5 값의 암호화된 문자열을 저장하는 것을 고려하기도 하였으나 BIGINT를 적용한 것으로 충분하다 판단함. 
+        - ##### TRANSACTION_RETURN { <ins>TRANSACTION_RETURN_NO : bigint</ins>, _TRANSACTION_RENT_NO_ : bigint , RETURN_DATE : timestamp, RENTAL_PERIOD : int}
+          -  대출하지 않은 책은 반납하지 못하기에 책 정보 혹은 사용자 정보를 저장하지 않고 대신 대출정보를 불러오는 방식을 적용
+          -  매 값을 insert 할때마다 빌린 기간을도출하는 Trigger를 설정하여 빌린 기간의 sec값을 자동으로 도출하도록 함. 
