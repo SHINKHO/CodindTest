@@ -61,4 +61,11 @@
         - ##### MEMBER { <ins>MEMBER_ID</ins> : varchar(15) , MEMBER_NAME_FIRST : varchar(35) ,MEMBER_NAME_LAST varchar(35) }
           - member가 회원 등록시 적용하는 member_ID는 중복되어 사용되면 안됨으로 PK 설정
           - NAME TABLE 을 따로 빼내어 AUTHOR와 공유하는 방법을 생각해 보았으나 복잡도만 증가하는거 같아 보류함.
-        - ##### BOOK { <ins>ISBN</ins> : bigint 
+        - ##### BOOK { <ins>ISBN</ins> : bigint , TITLE : varchar(40) , BOOK_CNT : SMALLINT, BOOK_VER : SMALLINT , WRITTEN_YEAR : DATE , _KDC_MAIN_ : SMALLINT , _KDC_DIV_ : SMALLINT , _AUTHOR_ : BIGINT }
+          - 책 제목의 평균적인 길이는 3-5 단어 이고 <br> (Tauberg, M. (2019, June 27). Are Book Titles Getting Longer? A Data Analysis of Trends in the World of Print. Towards Data Science. ) <br> 단어는 80%가 2-7자의 길이를 가짐 ( Mayzner, M. S., & Tresselt, M. E. (1965). Tables of Single-letter and Digram Frequency Counts for Various Word-length and Letter-position Combinations. Psychonomic Press.)
+          - 위 사실에 따라 80%가 최대 7자의 길이를 가진 단어 5자를 제목 테이블의 기준으로 잡아 35자로, 여기에 각 단어당 공백 포함이 필요하니 5자를 추가로 더하니 40자가 필요하단 결론이 나옴.
+          - BOOK_CNT 는 동일 ISBN 이 입력될 시 증가할 값(재고량)
+            - 단순 전체 재고량이며 <b>*대출 및 반납시 변동하지 않음*</b>
+          - BOOK_VER 은 해당 책이 연속된 시리즈일시 몇 번째 시리즈인지 나타냄.
+          - WRITTEN_YEAR 은 책이 쓰인 연도를 저장하여 추후 검색에 활용될 수 있음.
+        - ##### 
