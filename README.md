@@ -48,12 +48,17 @@
   - #### 2023.09.14 : Database/Schema 생성 및 테이블 생성, Backend 와 연결
       - <b> 테이터베이스 생성 </b> : UTF8 의, UNICODE_CI 방식으로 대소문자 구별없이 정렬하는 db 파일 생성
       - <b> 테이블 생성 </b> 설계상의 테이블을 구체적으로 type 지정함.
-        - ##### CLASSIFICATION { <ins>KDC_MAIN</ins> : usigned smallint , <ins>KDC_DIV</ins> : unsigned smallint }
+      - 밑은 최종 테이블들이며 <ins>밑줄은 pk</ins> , _이탤릭은 fk_ 을 나타냄
+        - ##### KDC_CODE { <ins>KDC_MAIN</ins> : usigned smallint , <ins>KDC_DIV</ins> : unsigned smallint }
           - KDC_MAIN과 KDC_DIV 모두 2 바이트의 값을 가지는 unsigned smallint 사용
           - 처음엔 LITERAL 을 쓰는것을 검토했으나 KDC 1판부터 6판까지 3자릿수의 숫자를 사용하는것은 변하지 않았고 원본이 되는 DDC 또한 3자리 원칙을 고수하였기에 smallint를 사용하기로 결정.
-        - ##### AUTHOR { <ins>AUTHOR_ID</ins> : bigint auto_increment unique , AUTHOR_NAME_FIRST : varchar(35), AUTHOR_NAME_LAST : varcahr(35) }
+        - ##### AUTHOR { <ins>AUTHOR_ID</ins> : bigint , AUTHOR_NAME_FIRST : varchar(35), AUTHOR_NAME_LAST : varcahr(35) }
           - index값에 포용할수 있는 범위가 가장 큰 값을 넣는 db관리 관행대로 bigint를 적용하기로 결정
           - 저자의 이름 초성+숫자로 저장하는 LITERAL 또한 검토하였으나 한글 저자 특성상 저장이 직관적이지 않아 숫자와 이름을 분리
           - 이름 관련
             - 영문 이름 : 영국 정부 Government Data Standards Catalogue 에 따르면 35+35자 조합을 권장함
             - 한글 이름 : 한국 등본 시스템상 성 1자 이름 5자 로, 영문 이름 제한보다 낮기에 영문 이름을 기준으로 삼음.
+        - ##### MEMBER { <ins>MEMBER_ID</ins> : varchar(15) , MEMBER_NAME_FIRST : varchar(35) ,MEMBER_NAME_LAST varchar(35) }
+          - member가 회원 등록시 적용하는 member_ID는 중복되어 사용되면 안됨으로 PK 설정
+          - NAME TABLE 을 따로 빼내어 AUTHOR와 공유하는 방법을 생각해 보았으나 복잡도만 증가하는거 같아 보류함.
+        - ##### BOOK { <ins>ISBN</ins> : bigint 
