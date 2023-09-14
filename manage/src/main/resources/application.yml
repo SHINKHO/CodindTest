@@ -1,0 +1,7 @@
+server :
+  port : 8080
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/DB
+    username: librarian
+    password: rmsoft
