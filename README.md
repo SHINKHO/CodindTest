@@ -23,7 +23,8 @@
   - 요구사항중 매우 강조되는 amazon ec2 서버에 대해 학습 
   - 익숙한 <b>Spring boot</b> 의 <b>RESTful api</b> 를 백엔드로, <b>mariaDB</b>를 DB로 사용하고, <b>JPA</b>로 DB관리
 
-- #### 2023.09.13 : DB 유저와 테이블 설계 
+- #### 2023.09.13 : DB 유저와 테이블 설계
+  - Springboot Initiailizer로 필요한 dependency를 스택하여 프로젝트 생성.
   - DB에 USER 생성 Librarian. 
   - 책 분류를 위해 한국십진분류법(KDC)을 도입
     - https://if-blog.tistory.com/10987 교육부 블로그 참조
