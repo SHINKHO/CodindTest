@@ -52,8 +52,10 @@ echo location of your Java installation.
 goto fail
 
 :findJavaFromJavaHome
-set JAVA_HOME=%JAVA_HOME:"=%
-set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+@rem set JAVA_HOME=%JAVA_HOME:"=%
+set JAVA_HOME=C:\Program Files\Zulu\zulu-17
+@rem set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+set JAVA_EXE=C:\Program Files\Zulu\zulu-17\bin\java.exe
 
 if exist "%JAVA_EXE%" goto execute
 
