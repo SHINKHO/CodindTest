@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{header :: header}"></div>
+</header>
+
+<main>
+    <h1>Book List</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Version</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
+            <td th:text="${book.version}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

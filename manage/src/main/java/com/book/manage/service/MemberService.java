@@ -2,7 +2,7 @@ package com.book.manage.service;
 
 import com.book.manage.domain.Member;
 import com.book.manage.repository.MemberRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class MemberService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Member> getAllMember(){
         try{
             return memberRepository.findAll();
@@ -49,7 +49,7 @@ public class MemberService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Member getMemberById(String id){
         try{
             Optional<Member> memberOpt = memberRepository.findById(id);
@@ -60,7 +60,7 @@ public class MemberService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Member> getMemberByFirstName(String firstName){
         try{
             return memberRepository.findByFirstName(firstName);
@@ -70,7 +70,7 @@ public class MemberService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Member> getMemberByLastName(String lastName){
         try{
             return memberRepository.findByLastName(lastName);
@@ -80,7 +80,7 @@ public class MemberService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Member> getMemberContains(String name){
         try{
             List<Member> unfilteredMember = getAllMember();

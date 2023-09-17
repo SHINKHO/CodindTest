@@ -4,7 +4,7 @@ import com.book.manage.domain.Author;
 import com.book.manage.domain.Book;
 import com.book.manage.domain.KdcCode;
 import com.book.manage.repository.BookRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class BookService {
             throw new RuntimeException("Error occurred while modifying book", e);
         }
     }
-
+    @Transactional(readOnly = true)
     public Book getBook(Long id){
         try{
             bookRepository.findById(id);
@@ -59,7 +59,7 @@ public class BookService {
         return null;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Book> getBookByTitle(String title){
         try{
             return bookRepository.findByTitle(title);
@@ -69,7 +69,7 @@ public class BookService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Book> getBookByAuthor(Author author){
         try{
             return bookRepository.findByAuthor(author);
@@ -79,7 +79,7 @@ public class BookService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Book> getBookByTitleAndVersion(String title, Short version){
         try{
             List<Book> filteredBooks = new LinkedList<>();
@@ -96,7 +96,7 @@ public class BookService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Book> getAllBooks(){
         try{
             return bookRepository.findAll();

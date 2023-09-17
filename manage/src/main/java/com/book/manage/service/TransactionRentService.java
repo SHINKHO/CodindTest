@@ -4,7 +4,7 @@ import com.book.manage.domain.Book;
 import com.book.manage.domain.Member;
 import com.book.manage.domain.TransactionRent;
 import com.book.manage.repository.TransactionRentRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class TransactionRentService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<TransactionRent> getAllRents() {
         try {
             return rentRepository.findAll();
@@ -39,7 +39,7 @@ public class TransactionRentService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public TransactionRent getRent(Long id) {
         try {
             Optional<TransactionRent> rentOpt = rentRepository.findById(id);
@@ -50,7 +50,7 @@ public class TransactionRentService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<TransactionRent> getRentsByMember(Member member) {
         try {
             return rentRepository.findByMember(member);
@@ -60,7 +60,7 @@ public class TransactionRentService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<TransactionRent> getRentsByBook(Book book) {
         try {
             return rentRepository.findByBook(book);

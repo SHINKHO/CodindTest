@@ -11,6 +11,15 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(){
-        return  "home";
+        return  "index";
+    }
+    @RequestMapping("/bookPage")
+    public String books(){
+        return "books";
+    }
+
+    @RequestMapping("/transactionPage")
+    public String transaction(){
+        return "transactions";
     }
 }

@@ -25,7 +25,13 @@ spring:
     hibernate:
       ddl-auto: update
       physical_naming_strategy : com.book.manage.config.CustomPhysicalNamingStrategy
-
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    mode: HTML
+    encoding: UTF-8
 logging:
   level:
     org.hibernate.type : trace

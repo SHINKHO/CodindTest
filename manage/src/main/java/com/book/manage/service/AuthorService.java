@@ -2,7 +2,7 @@ package com.book.manage.service;
 
 import com.book.manage.domain.Author;
 import com.book.manage.repository.AuthorRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,7 +41,7 @@ public class AuthorService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Author getAuthorById(Long id){
         try{
             Optional<Author> memberOpt = authorRepository.findById(id);
@@ -52,7 +52,7 @@ public class AuthorService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Author> getAuthorByFirstName(String firstName){
         List<Author> authors = null;
 
@@ -66,7 +66,7 @@ public class AuthorService {
         return authors;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Author> getAuthorByLastName(String lastName){
         List<Author> authors = null;
 
@@ -80,7 +80,7 @@ public class AuthorService {
         return authors;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Author> getAuthorContains(String name){
         try{
             List<Author> authors = new LinkedList<>();
@@ -97,7 +97,7 @@ public class AuthorService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Author> getAllAuthor(){
         try {
             return authorRepository.findAll();
