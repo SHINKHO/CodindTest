@@ -74,9 +74,12 @@
         - ##### TRANSACTION_RETURN { <ins>TRANSACTION_RETURN_NO : bigint</ins>, _TRANSACTION_RENT_NO_ : bigint , RETURN_DATE : timestamp, RENTAL_PERIOD : int}
           -  대출하지 않은 책은 반납하지 못하기에 책 정보 혹은 사용자 정보를 저장하지 않고 대신 대출정보를 불러오는 방식을 적용
           -  매 값을 insert 할때마다 빌린 기간을도출하는 Trigger를 설정하여 빌린 기간의 sec값을 자동으로 도출하도록 함.
-    -  #### 2023-09-15~17 : Backend 개발 및 연결
+    -  #### 2023-09-15~17 : Backend 개발 및 연결 , aws ec2 설정
         - 이전 교육시설 최종 프로젝트에서 spring managed bean coverage 관련 문제로 문제가 되어 
         - Spring MockMvc 테스트 코드로 연관 관계가 적고 생성도 간편한 author table로 db연결 테스트 진행(로컬)
+        - ##### config 패키지
+          - 설정 패키지
+          - hibernate의 PhysicalNamingStrategy로 컬럼명과 테이블명을 항상 대문자로 고정하기 위한 클래스
         - ##### domain 패키지
           - 각종 Hibernate 로 구현한 JPA Entity의 집합 패키지
         - ##### repository 패키지
@@ -85,3 +88,5 @@
           - 에러 처리,로깅을 삽입한 Service 집합 패키지
         - ##### controller 패키지
           - Restful Controller 집합 패키지
+        - ##### Amazon ec2
+          - Ubuntu 22.04, mariadb 설치 및 설정.
