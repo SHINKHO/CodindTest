@@ -2,12 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transactions</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <header>
     <div th:replace="~{header :: header}"></div>
 </header>
+
+<main>
+    <h1>Transaction List</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>MEMBER</th>
+            <th>BOOK</th>
+            <th>DATETIME</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transactionRent : ${transactionRent}">
+            <td th:text="${transactionRent.id}"></td>
+            <td th:text="${transactionRent.member.firstName+ ' ' + transactionRent.member.lastName}"></td>
+            <td th:text="${transaction.book.title}"></td>
+            <td th:text="${transactionRent.dateTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="search-bar">
+        <select id="search-select">
+            <option value="member">Author</option>
+            <option value="book">Title</option>
+            <option value="dateTime">ISBN</option>
+        </select>
+        <input type="text" id="search-input" placeholder="Search...">
+        <button id="search-button">Search</button>
+    </div>
+</main>
 </body>
 </html>
