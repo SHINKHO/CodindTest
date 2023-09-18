@@ -86,8 +86,28 @@
           - 에러 처리,로깅을 삽입한 Service 집합 패키지
         - ##### controller 패키지
           - Restful Controller 집합 패키지
+         
+    - #### 2023-09-18 : 구조 변경
+        - ##### Controller패키지
+            - 기존 난잡하던 RESTful Controller의 return type을 정리
             - ##### dto 패키지
-            - Rest 요청 시 Entity가 직접적으로 불러지거나 불리는것을 막기 위한 DTO 객체
-            - 분리가 되어있진 않음.
+            - Rest 요청 시 Entity의 직접적인 접근을 막기 위한 DTO 객체
+            - 단 현재 단계에선 로직당 필요한 데이터 별 분리가 되어있진 않음.
+        - ##### Domain 패키지
+            - Lombok 적용하여 코드 정리
+        - ##### 기타 수정사항
+            - Lombok 적용하여 변경된 메서드명 맞춤
+            - 테스트 클래스 삭제
+    
         - ##### Amazon ec2
           - Ubuntu 22.04, mariadb 설치 및 설정.
+          - CI/CD Pipeline (Github -> CodeBuild -> ElasticBeansTalk) CodeBuild에서 프로젝트를 찾을 수 없습니다 문제 발생
+          - file structure 문제(manage 프로젝트가 github 저장소 내부에 있음)로 추정 
+
+        - ##### Thymeleaf 사용
+          - Template에 transaction, book , header등 css 적용한 html을 작성하여 값 불러오기
+          - 요구사항인 도서대여-반납처리는 transaction 페이지에서 이루어지도록 설계
+          - 도서등록-수정처리는 book페이지에서 이루어지도록 설계
+          - 로직 미구현
+            
+  - # 제출 
