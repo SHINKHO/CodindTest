@@ -10,35 +10,32 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Year;
+import java.time.LocalDate;
 
 @Getter@Setter
 public class BookDTO {
 
-    private Long isbn;
+    private String isbn;
 
     private String title;
 
-    private Short version;
+    private Short bookVersion;
 
-    private Short count;
+    private Short bookCount;
 
-    private Year year;
+    private LocalDate writtenDate;
 
-    private KdcCode main;
-
-    private KdcCode div;
+    private KdcCode kdcCode;
 
     private Author author;
 
     public BookDTO(Book book){
         this.isbn = book.getIsbn();
         this.title = book.getTitle();
-        this.version = book.getVersion();
-        this.count = book.getCount();
-        this.year = book.getYear();
-        this.main = book.getMain();
-        this.div = book.getDiv();
+        this.bookVersion = book.getBookVersion();
+        this.bookCount = book.getBookCount();
+        this.writtenDate = book.getWrittenDate();
+        this.kdcCode = book.getKdcCode();
         this.author = book.getAuthor();
     }
 

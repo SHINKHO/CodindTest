@@ -1,5 +1,6 @@
 package com.book.manage.controller;
 
+import com.book.manage.controller.dto.TransactionReturnDTO;
 import com.book.manage.domain.TransactionReturn;
 import com.book.manage.service.TransactionReturnService;
 import lombok.RequiredArgsConstructor;
@@ -7,45 +8,77 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/transactionReturns")
 public class RestfulTransactionReturnController {
 
     private final TransactionReturnService transactionReturnService;
 
-    @GetMapping("/transactionReturns")
-    public ResponseEntity<List<TransactionReturn>> getAllTransactionReturns() {
+    @GetMapping("/")
+    public ResponseEntity<List<TransactionReturnDTO>> getAllTransactionReturns() {
         List<TransactionReturn> transactionReturns = transactionReturnService.findAll();
-        return new ResponseEntity<>(transactionReturns, HttpStatus.OK);
+        List<TransactionReturnDTO> transactionReturnDTOs = new LinkedList<>();
+        for (TransactionReturn transactionReturn : transactionReturns) {
+            transactionReturnDTOs.add(new TransactionReturnDTO(transactionReturn));
+        }
+        return ResponseEntity.ok(transactionReturnDTOs);
     }
 
-    @GetMapping("/transactionReturns/{id}")
-    public ResponseEntity<TransactionReturn> getTransactionReturnById(@PathVariable Long id) {
-        Optional<TransactionReturn> transactionReturn = transactionReturnService.findById(id);
-        if (transactionReturn.isPresent()) {
-            return new ResponseEntity<>(transactionReturn.get(), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<TransactionReturnDTO> getTransactionReturnById(@PathVariable Long id) {
+        TransactionReturn transactionReturn = transactionReturnService.findById(id).orElse(null);
+        if (transactionReturn != null) {
+            return ResponseEntity.ok(new TransactionReturnDTO(transactionReturn));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/transactionReturns")
-    public ResponseEntity<Void> addTransactionReturn(@RequestBody TransactionReturn transactionReturn) {
+    @PostMapping("/")
+    public ResponseEntity<Void> addTransactionReturn(@RequestBody TransactionReturnDTO transactionReturnDTO) {
+        if (transactionReturnDTO == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        TransactionReturn transactionReturn = new TransactionReturn(
+                transactionReturnDTO.getId(),
+                transactionReturnDTO.getTransactionRentNo(),
+                transactionReturnDTO.getDatetime(),
+                transactionReturnDTO.getRentalPeriod()
+        );
         transactionReturnService.save(transactionReturn);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/transactionReturns/{id}")
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateTransactionReturn(@PathVariable Long id, @RequestBody TransactionReturnDTO updatedTransactionReturnDTO) {
+        TransactionReturn existingTransactionReturn = transactionReturnService.findById(id).orElse(null);
+        if (existingTransactionReturn == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (updatedTransactionReturnDTO.getDatetime() != null) {
+            existingTransactionReturn.setDatetime(updatedTransactionReturnDTO.getDatetime());
+        }
+
+        if (updatedTransactionReturnDTO.getRentalPeriod() != null) {
+            existingTransactionReturn.setRentalPeriod(updatedTransactionReturnDTO.getRentalPeriod());
+        }
+        transactionReturnService.save(existingTransactionReturn);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransactionReturn(@PathVariable Long id) {
-        Optional<TransactionReturn> transactionReturn = transactionReturnService.findById(id);
-        if (transactionReturn.isPresent()) {
-            transactionReturnService.remove(transactionReturn.get());
+        TransactionReturn transactionReturn = transactionReturnService.findById(id).orElse(null);
+        if (transactionReturn != null) {
+            transactionReturnService.remove(transactionReturn);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 }

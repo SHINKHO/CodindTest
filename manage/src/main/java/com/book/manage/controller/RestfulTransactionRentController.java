@@ -1,5 +1,6 @@
 package com.book.manage.controller;
 
+import com.book.manage.controller.dto.TransactionRentDTO;
 import com.book.manage.domain.TransactionRent;
 import com.book.manage.service.TransactionRentService;
 import lombok.RequiredArgsConstructor;
@@ -7,37 +8,55 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/transactionRents")
 public class RestfulTransactionRentController {
 
     private final TransactionRentService transactionRentService;
 
-    @GetMapping("/transactionRents")
-    public ResponseEntity<List<TransactionRent>> getAllTransactionRents() {
+    @GetMapping("/")
+    public ResponseEntity<List<TransactionRentDTO>> getAllTransactionRents() {
         List<TransactionRent> transactionRents = transactionRentService.getAllRents();
-        return new ResponseEntity<>(transactionRents, HttpStatus.OK);
+        List<TransactionRentDTO> transactionRentDTOs = new LinkedList<>();
+
+        for(TransactionRent rent : transactionRents){
+            transactionRentDTOs.add(new TransactionRentDTO(rent));
+        }
+        return ResponseEntity.ok(transactionRentDTOs);
     }
 
-    @GetMapping("/transactionRents/{id}")
-    public ResponseEntity<TransactionRent> getTransactionRentById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<TransactionRentDTO> getTransactionRentById(@PathVariable Long id) {
         TransactionRent transactionRent = transactionRentService.getRent(id);
         if (transactionRent != null) {
-            return new ResponseEntity<>(transactionRent, HttpStatus.OK);
+            return ResponseEntity.ok(new TransactionRentDTO(transactionRent));
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/transactionRents")
-    public ResponseEntity<Void> addTransactionRent(@RequestBody TransactionRent transactionRent) {
-        transactionRentService.addRent(transactionRent);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping("/")
+    public ResponseEntity<Void> addTransactionRent(@RequestBody TransactionRentDTO transactionRentDTO) {
+        if (transactionRentDTO != null) {
+            TransactionRent transactionRent = new TransactionRent(
+                    transactionRentDTO.getId(),
+                    transactionRentDTO.getMember(),
+                    transactionRentDTO.getBook(),
+                    transactionRentDTO.getDatetime()
+            );
+            transactionRentService.addRent(transactionRent);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
-    @DeleteMapping("/transactionRents/{id}")
+
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTransactionRent(@PathVariable Long id) {
         TransactionRent transactionRent = transactionRentService.getRent(id);
         if (transactionRent != null) {

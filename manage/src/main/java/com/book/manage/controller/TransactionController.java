@@ -6,13 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class HomeController {
-
-
-    @RequestMapping("/")
-    public String home(){
-        return  "index";
+public class TransactionController {
+    @RequestMapping("/transactionPage")
+    public String transaction(){
+        return "transactions";
     }
-
-
 }
