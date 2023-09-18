@@ -2,6 +2,7 @@ package com.book.manage.service;
 
 import com.book.manage.domain.Member;
 import com.book.manage.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class MemberService {
+    @Autowired
     private final MemberRepository memberRepository;
 
     @Transactional

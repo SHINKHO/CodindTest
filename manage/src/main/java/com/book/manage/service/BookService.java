@@ -4,6 +4,7 @@ import com.book.manage.domain.Author;
 import com.book.manage.domain.Book;
 import com.book.manage.domain.KdcCode;
 import com.book.manage.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class BookService {
-
+    @Autowired
     private final BookRepository bookRepository;
 
     @Transactional

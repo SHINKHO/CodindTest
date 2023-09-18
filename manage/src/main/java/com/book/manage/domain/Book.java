@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Book {
     @Id
-    @Column(name = "ISBN")
+    @Column(name = "ISBN", length = 13)
     private String isbn;
 
     @Column(name = "TITLE", length = 40)

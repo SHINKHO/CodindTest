@@ -4,6 +4,7 @@ import com.book.manage.controller.dto.BookDTO;
 import com.book.manage.domain.Book;
 import com.book.manage.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/books")
 public class RestfulBookController {
-
     private final BookService bookService;
 
     @GetMapping("/")
@@ -28,10 +28,6 @@ public class RestfulBookController {
 
         for (Book book : books) {
             bookDTOs.add(new BookDTO(book));
-        }
-
-        if (bookDTOs.isEmpty()) {
-            return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok(bookDTOs);

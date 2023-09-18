@@ -4,6 +4,7 @@ import com.book.manage.controller.dto.AuthorDTO;
 import com.book.manage.domain.Author;
 import com.book.manage.service.AuthorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/authors")
 public class RestfulAuthorController {
-
     private final AuthorService authorService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
         List<Author> authors = authorService.getAllAuthor();
         List<AuthorDTO> authorDTOs = authors.stream()

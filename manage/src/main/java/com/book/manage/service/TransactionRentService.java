@@ -4,6 +4,7 @@ import com.book.manage.domain.Book;
 import com.book.manage.domain.Member;
 import com.book.manage.domain.TransactionRent;
 import com.book.manage.repository.TransactionRentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class TransactionRentService {
-
+    @Autowired
     private final TransactionRentRepository rentRepository;
 
     @Transactional

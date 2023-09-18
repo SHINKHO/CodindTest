@@ -21,7 +21,7 @@ public class TransactionRent {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "BOOK", referencedColumnName = "isbn")
+    @JoinColumn(name = "BOOK", referencedColumnName = "ISBN")
     private Book book;
 
     @Column(name = "RENT_DATETIME")

@@ -4,6 +4,7 @@ import com.book.manage.controller.dto.TransactionRentDTO;
 import com.book.manage.domain.TransactionRent;
 import com.book.manage.service.TransactionRentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/transactionRents")
 public class RestfulTransactionRentController {
-
     private final TransactionRentService transactionRentService;
 
     @GetMapping("/")

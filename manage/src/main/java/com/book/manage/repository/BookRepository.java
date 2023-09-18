@@ -4,6 +4,7 @@ import com.book.manage.domain.Author;
 import com.book.manage.domain.Book;
 import com.book.manage.domain.KdcCode;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +29,9 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     public Optional<Book> findFirstByTitle(String title);
 
-    public List<Book> findByTitleAndVersion(String title, Short version);
+    public List<Book> findByTitleAndBookVersion(String title, Short version);
 
+    @Query("SELECT b FROM Book b WHERE b.writtenDate BETWEEN :startDate AND :endDate")
     List<Book> findBooksWrittenInDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 }
