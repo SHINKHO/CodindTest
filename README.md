@@ -35,7 +35,7 @@
       - <b>book</b> : classification 과 author를 fk로 가지는 책 테이블
         - 중복 가능한 제목을 가짐.
         - 정기 간행,시리즈물일경우 version 으로 몇 번째인지 명시
-        - 단순 갯수를 나타내는 Unique key count로 전체 갯수 명시
+        - 단순 갯수를 나타내는 key count로 전체 갯수 명시
         - 해당 도서의 isbn를 pk로 사용.
     - ##### 사용자 관련 TABLE
       - 기간상 문제로 jwt 등의 보안 요소를 적용하기 버거워 사용자 비밀번호는 적용하지 않음.
