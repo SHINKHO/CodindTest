@@ -98,6 +98,8 @@
         - ##### 기타 수정사항
             - Lombok 적용하여 변경된 메서드명 맞춤
             - 테스트 클래스 삭제
+            - 데이터베이스 jpa기반 생성을 기준으로 변경
+            - written_year 에서 written_date로 변경
     
         - ##### Amazon ec2
           - Ubuntu 22.04, mariadb 설치 및 설정.
